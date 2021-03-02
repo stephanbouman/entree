@@ -16,11 +16,9 @@ class UserTest extends TestCase {
     use WithFaker;
 
     /**
-     * A basic unit test example.
-     *
      * @return void
      */
-    public function testIfUserCanJoinAnOpenEvent() {
+    public function test_if_user_can_join_an_open_event() {
 
         $user = User::factory()->create();
 
@@ -40,7 +38,7 @@ class UserTest extends TestCase {
      *
      * @return void
      */
-    public function testIfUserCanJoinAnPrivateEventWithoutAnInvitation() {
+    public function test_if_user_can_join_an_private_event_without_an_invitation() {
 
         $user = User::factory()->create();
 
@@ -60,7 +58,7 @@ class UserTest extends TestCase {
      *
      * @return void
      */
-    public function testIfUserCanJoinAnPrivateEventWithAnInvitation() {
+    public function test_if_user_can_join_an_private_event_with_an_invitation() {
 
         $user = User::factory()->create();
 
