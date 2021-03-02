@@ -9,6 +9,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class EventTest extends TestCase {
+    use RefreshDatabase;
+    use WithFaker;
+
     /**
      * @return void
      */
@@ -16,10 +19,10 @@ class EventTest extends TestCase {
         $organization = Organization::factory()->create();
         $event        = $organization->events()->save( Event::factory()->make() );
 
-        $response = $this->get( route( 'event.index' ) );
+        $response = $this->get( route( 'events.index' ) );
 
         $response->assertSee( $event->title );
-        $response->assertSee( route('event.show',$event) );
+        $response->assertSee( route('events.show',$event) );
 
         $response->assertStatus( 200 );
 
@@ -30,7 +33,7 @@ class EventTest extends TestCase {
         $organization = Organization::factory()->create();
         $event        = $organization->events()->save( Event::factory()->make() );
 
-        $response = $this->get( route( 'event.show',$event ) );
+        $response = $this->get( route( 'events.show',$event ) );
 
         $response->assertSee( $event->title );
         $response->assertStatus( 200 );
