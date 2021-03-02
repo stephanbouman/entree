@@ -46,7 +46,7 @@ class User extends Authenticatable {
     }
 
 
-    public function join( Event $event ) {
+    public function joinEvent( Event $event ) {
         if ( $event->isProtected()
              && ! $this->isInvitedForEvent( $event ) ) {
             return false;
@@ -56,11 +56,9 @@ class User extends Authenticatable {
             return false;
         }
 
-        if ( ! $event->users()->attach( $this ) ) {
-            return false;
-        }
+        $this->events()->attach( $event );
 
-        return true;
+        return $this->events;
     }
 
     private function hasAlreadyJoined( Event $event ) {
