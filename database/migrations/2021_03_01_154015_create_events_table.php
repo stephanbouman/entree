@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration {
             $table->id();
             $table->integer( 'organization_id' );
             $table->string( 'title' );
-            $table->date( 'date' );
+            $table->dateTime( 'date' );
             $table->string( 'location' );
             $table->boolean( 'open_entry' )->default( true );
             $table->boolean( 'public' )->default( true );
