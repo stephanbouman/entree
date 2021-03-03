@@ -41,13 +41,18 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-    public function events() {
-        return $this->belongsToMany( Event::class, 'event_user' )
-                    ->withTimestamps();
+    public function tickets() {
+        return $this->hasMany( Ticket::class );
     }
 
+    public function getEventsAttribute() {
+        return $this->tickets->map( function ( Ticket $ticket ) {
+            return $ticket->price->event;
+        } );
+    }
 
-    public function joinEvent( Event $event ) {
+    public function getTicket( Price $price ) {
+        $event = $price->event;
         if ( $event->isProtected()
              && ! $this->isInvitedForEvent( $event ) ) {
             return false;
@@ -57,9 +62,8 @@ class User extends Authenticatable {
             return false;
         }
 
-        $this->events()->attach( $event );
 
-        return $this->events;
+        return Ticket::createTicket( $this, $price );
     }
 
     private function hasAlreadyJoined( Event $event ) {

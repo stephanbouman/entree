@@ -13,7 +13,7 @@ class Event extends Model {
     ];
 
 
-    public function prices() {
+    public function Prices() {
         return $this->hasMany( Price::class );
     }
 
@@ -34,7 +34,7 @@ class Event extends Model {
         return ! $this->open_entry;
     }
 
-    public function getAvailablePricesAttribute() {
+    public function getAvailablPricesAttribute() {
         return $this->prices()->get()->map(function(Price $price){
             $sold = 0;
             return [
@@ -42,7 +42,7 @@ class Event extends Model {
                 'price' => $price->price,
                 'sold' => $sold,
                 'maximum' => $price->maximum,
-                'available' => !$price->stop_selling->isPast() && ($price->maximum - $sold > 0)
+                'available' => !$price->stop_selling->isPast() && ( $price->maximum - $sold > 0)
             ];
         });
     }

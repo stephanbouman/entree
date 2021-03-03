@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Models\Event;
 use App\Models\Invitation;
 use App\Models\Organization;
+use App\Models\Price;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -28,7 +29,10 @@ class UserTest extends TestCase {
             Event::factory()->make( [ 'open_entry' => true ] )
         );
 
-        $user->joinEvent( $event );
+        $price = $event->prices()->save(
+            Price::factory()->make()
+        );
+        $user->getTicket( $price );
 
         $this->assertTrue( User::find( $user->id )->events->contains( $event ) );
     }
@@ -48,7 +52,11 @@ class UserTest extends TestCase {
             Event::factory()->make( [ 'open_entry' => false ] )
         );
 
-        $user->joinEvent( $event );
+        $price = $event->prices()->save(
+            Price::factory()->make()
+        );
+
+        $user->getTicket( $price );
 
         $this->assertFalse( User::find( $user->id )->events->contains( $event ) );
     }
@@ -72,7 +80,11 @@ class UserTest extends TestCase {
             Invitation::factory()->make( [ 'email' => $user->email ] )
         );
 
-        $user->joinEvent( $event );
+        $price = $event->prices()->save(
+            Price::factory()->make()
+        );
+        
+        $user->getTicket($price);
 
         $this->assertTrue( User::find( $user->id )->events->contains( $event ) );
     }
