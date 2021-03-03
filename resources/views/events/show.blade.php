@@ -47,7 +47,7 @@
                     @foreach($event->availablePrices as $price)
                         <dl class="flex justify-between mb-2">
                             <dt class="text-gray-500">{{$price['title']}}</dt>
-                            <dd class="border-dashed border-green-200 border-b">&euro; {{ number_format($price['ticket'],2,'.','.')}}</dd>
+                            <dd class="border-dashed border-green-200 border-b">&euro; {{ number_format($price['price'],2,'.','.')}}</dd>
                         </dl>
                     @endforeach
                 </div>

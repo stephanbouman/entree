@@ -34,8 +34,8 @@ class Event extends Model {
         return ! $this->open_entry;
     }
 
-    public function getAvailablPricesAttribute() {
-        return $this->prices()->get()->map(function(Price $price){
+    public function getAvailablePricesAttribute() {
+        return $this->prices->map(function(Price $price){
             $sold = 0;
             return [
                 'title' => $price->title,
