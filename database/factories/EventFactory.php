@@ -28,6 +28,7 @@ class EventFactory extends Factory {
             'location'   => $this->faker->city,
             'public'     => $this->faker->boolean,
             'open_entry' => $this->faker->boolean,
+            'free_event' => $this->faker->boolean(30),
             'slug'       => Str::slug( $title )
         ];
     }

@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration {
             $table->string( 'location' );
             $table->boolean( 'open_entry' )->default( true );
             $table->boolean( 'public' )->default( true );
+            $table->boolean( 'free_event' )->default( true );
             $table->string( 'slug' );
             $table->timestamps();
         } );

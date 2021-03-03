@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Event;
 use App\Models\Invitation;
 use App\Models\Organization;
+use App\Models\Price;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,12 @@ class DatabaseSeeder extends Seeder {
                             Event::factory( 3 )->make()
                         );
                     } );
+        Event::where('free_event', false)->get()->each(function(Event $event){
+            $event->prices()->saveMany(
+                Price::factory(2)->make()
+            );
+
+        });
 
         User::factory( 20 )->create()->each( function ( User $user ) {
             $user->events()->attach( Event::all()->random( rand( 1, 4 ) ) );
@@ -31,5 +38,6 @@ class DatabaseSeeder extends Seeder {
                 Invitation::factory(12)->make()
             );
         });
+
     }
 }

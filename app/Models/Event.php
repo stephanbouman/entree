@@ -13,6 +13,10 @@ class Event extends Model {
     ];
 
 
+    public function prices() {
+        return $this->hasMany( Price::class );
+    }
+
     public function organization() {
         return $this->belongsTo( Organization::class );
     }
@@ -28,5 +32,22 @@ class Event extends Model {
 
     public function isProtected() {
         return ! $this->open_entry;
+    }
+
+    public function getAvailablePricesAttribute() {
+        return $this->prices()->get()->map(function(Price $price){
+            $sold = 0;
+            return [
+                'title' => $price->title,
+                'price' => $price->price,
+                'sold' => $sold,
+                'maximum' => $price->maximum,
+                'available' => !$price->stop_selling->isPast() && ($price->maximum - $sold > 0)
+            ];
+        });
+    }
+
+    public function getIsFreeOfChargeAttribute() {
+        return $this->free_event;
     }
 }
