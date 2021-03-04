@@ -14,6 +14,18 @@ class Price extends Model {
     ];
 
     public function event() {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo( Event::class );
+    }
+
+    public function tickets() {
+        return $this->hasMany( Ticket::class );
+    }
+
+    public function getTicketsSoldAttribute() {
+        return $this->tickets->count();
+    }
+
+    public function getTicketsAvailableAttribute() {
+        return $this->maximum - $this->tickets->count();
     }
 }
