@@ -79,4 +79,29 @@
         repudiandae. Beatae consequuntur debitis ea mollitia, neque quibusdam. Asperiores culpa hic incidunt odio quos.
         Aut, consectetur corporis deleniti, doloremque eos facilis hic laboriosam molestiae nobis nostrum odit
         perferendis quam quis quod reprehenderit similique soluta tempora tempore ullam vel voluptas.</p>
+
+    @foreach($event->prices as $price)
+        <dl class="mb-3 border p-4">
+            <dt class="text-gray-400 text-sm">Naam</dt>
+            <dd>{{ $price->title }}</dd>
+
+            <dt class="text-gray-400 text-sm">Prijs</dt>
+            <dd>{{ $price->price }}</dd>
+
+            <dt class="text-gray-400 text-sm">Start</dt>
+            <dd>{{ $price->start_selling }}</dd>
+
+            <dt class="text-gray-400 text-sm">Stop</dt>
+            <dd>{{ $price->stop_selling }}</dd>
+
+            <dt class="text-gray-400 text-sm">Max tickets</dt>
+            <dd>{{ $price->maximum }}</dd>
+
+            <dt class="text-gray-400 text-sm">Verkocht</dt>
+            <dd>{{ $price->tickets_sold }}</dd>
+
+            <dt class="text-gray-400 text-sm">Beschikbaar</dt>
+            <dd>{{ $price->tickets_available}}</dd>
+        </dl>
+    @endforeach
 </x-app-interface>

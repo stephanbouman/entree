@@ -22,18 +22,20 @@ class EventTest extends TestCase {
         $response = $this->get( route( 'events.index' ) );
 
         $response->assertSee( $event->title );
-        $response->assertSee( route('events.show',$event) );
+        $response->assertSee( route( 'events.show', $event ) );
 
         $response->assertStatus( 200 );
 
-    }/**
+    }
+
+    /**
      * @return void
      */
     public function test_if_a_user_can_see_the_event_detail_page() {
         $organization = Organization::factory()->create();
         $event        = $organization->events()->save( Event::factory()->make() );
 
-        $response = $this->get( route( 'events.show',$event ) );
+        $response = $this->get( route( 'events.show', $event ) );
 
         $response->assertSee( $event->title );
         $response->assertStatus( 200 );

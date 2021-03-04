@@ -83,8 +83,8 @@ class UserTest extends TestCase {
         $price = $event->prices()->save(
             Price::factory()->make()
         );
-        
-        $user->getTicket($price);
+
+        $user->getTicket( $price );
 
         $this->assertTrue( User::find( $user->id )->events->contains( $event ) );
     }

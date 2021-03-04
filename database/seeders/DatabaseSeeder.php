@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder {
 
     private function createTickets( User $user, $amount ) {
         for ( $i = 0; $i < $amount; $i ++ ) {
-            Ticket::createTicket($user, Price::all()->random());
+            Ticket::createTicket( $user, Price::all()->random() );
 
         }
     }
